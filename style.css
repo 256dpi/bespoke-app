@@ -1,0 +1,24 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  height: 100%;
+}
+
+.centered {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.title {
+  display: flex;
+  font-size: 24px;
+  color: #666;
+  text-align: center;
+}
