@@ -1,0 +1,21 @@
+{
+  "name": "bespoke-presenter",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "rebuild": "./node_modules/.bin/electron-rebuild",
+    "package": "electron-packager ./ BespokePresenter --platform=all --arch=all --out ~/Desktop/BespokePresenter --version 0.37.3 --overwrite",
+    "package-darwin": "electron-packager ./ BespokePresenter --platform=darwin --arch=all --out ~/Desktop/BespokePresenter --version 0.37.3 --overwrite",
+    "run": "./node_modules/.bin/electron ."
+  },
+  "author": "Joël Gähwiler <joel.gaehwiler@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.3",
+    "electron-rebuild": "^1.1.3",
+    "electron-packager": "^6.0.0"
+  },
+  "dependencies": {
+  }
+}
