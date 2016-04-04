@@ -31,4 +31,4 @@ If you have two screens connected, "Toggle Presentation" will show the presentat
 
 ## Presenter Notes
 
-Bespoke.app will search for child elements of the current slide with the `notes` class to populate the presenter notes area. Make sure you hide the notes from your actual presentation.
+Bespoke.app will search for the first child element of the current slide with the `notes` class to populate the presenter notes area. You can hide the notes from your presentation using CSS.
