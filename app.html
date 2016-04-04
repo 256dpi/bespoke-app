@@ -34,19 +34,6 @@
         $("#current")[0].contentWindow.deck.slide(id);
         $("#next")[0].contentWindow.deck.slide(id + 1);
       });
-
-      // function relay(id) {
-      //   const ipcRenderer = require('electron').ipcRenderer;
-      //   ipcRenderer.send('slide', id);
-      // }
-      //
-      // window.deck.on('next', function(event){
-      //   relay(event.index);
-      // });
-      //
-      // window.deck.on('prev', function(event){
-      //   relay(event.index);
-      // });
     </script>
   </body>
 </html>
