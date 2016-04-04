@@ -50,16 +50,18 @@ body {
   pointer-events: none;
 }
 
-.button {
+.button, .button:focus {
   border: 0;
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 24px;
-  background-color: #ddd;
   cursor: pointer;
+  background-color: #2ACEB9;
+  color: white;
+  outline: 0;
 }
 
-.button:hover, .button:focus {
-  background-color: #ccc;
+.button:hover {
+  background-color: #04B9A2;
   outline: 0;
 }
