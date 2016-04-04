@@ -17,7 +17,8 @@ app.on('ready', function() {
     width: 600,
     height: 400,
     webPreferences: {
-      nodeIntegration: false
+      nodeIntegration: false,
+      webSecurity: false
     }
   });
 
@@ -45,7 +46,8 @@ function startPresentation(file) {
       maximizable: false,
       alwaysOnTop: true,
       webPreferences: {
-        nodeIntegration: false
+        nodeIntegration: false,
+        webSecurity: false
       }
     });
 
