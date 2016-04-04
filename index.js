@@ -46,10 +46,6 @@ electron.ipcMain.on('present', function(_, file){
     startPresentation(file);
   } else {
     presentationWindow.close();
-
-    presentationWindow.on('closed', function() {
-      presentationWindow = null;
-    });
   }
 });
 
@@ -88,4 +84,8 @@ function startPresentation(file) {
   }
 
   presentationWindow.loadURL('file://' + __dirname + '/present.html?file=' + btoa(file));
+
+  presentationWindow.on('closed', function() {
+    presentationWindow = null;
+  });
 }
