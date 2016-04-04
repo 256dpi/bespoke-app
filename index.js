@@ -1,6 +1,7 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const btoa = require('btoa');
 
 var appWindow = null;
 var presentationWindow = null;
@@ -26,12 +27,7 @@ app.on('ready', function() {
 
   appWindow.webContents.on('will-navigate', function(event, file){
     event.preventDefault();
-
-    appWindow.loadURL('file://' + __dirname + '/app.html');
-
-    appWindow.webContents.once('dom-ready', function(){
-      appWindow.webContents.send('file', file);
-    });
+    appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
   });
 });
 

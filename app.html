@@ -20,13 +20,19 @@
       const $ = require('./bower_components/jquery/dist/jquery.js');
       const ipcRenderer = require('electron').ipcRenderer;
 
-      ipcRenderer.on('file', function(_, file) {
-        $('#file').html(file);
-        $('#current').attr('src', file);
-        $('#next').attr('src', file);
-        $('#present').click(function(){
-          ipcRenderer.send('present', file);
-        });
+      function qs(key) {
+        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+      }
+
+      const file = atob(qs('file'));
+
+      $('#file').html(file);
+      $('#current').attr('src', file);
+      $('#next').attr('src', file);
+      $('#present').click(function(){
+        ipcRenderer.send('present', file);
       });
 
       ipcRenderer.on('slide', function(_, id) {
