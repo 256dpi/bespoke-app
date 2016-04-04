@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "rebuild": "./node_modules/.bin/electron-rebuild",
-    "package": "electron-packager ./ BespokeP --platform=all --arch=all --out ~/Desktop/Bespoke --version 0.37.3 --overwrite",
-    "package-darwin": "electron-packager ./ Bespoke --platform=darwin --arch=all --out ~/Desktop/Bespoke --version 0.37.3 --overwrite",
+    "package": "electron-packager ./ Bespoke --icon logo.icns --platform darwin --arch all --out ~/Desktop/Bespoke --version 0.37.3 --overwrite",
     "run": "./node_modules/.bin/electron ."
   },
   "author": "Joël Gähwiler <joel.gaehwiler@gmail.com>",
