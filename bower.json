@@ -1,0 +1,15 @@
+{
+  "name": "bespoke-presenter",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Joël Gähwiler <joel.gaehwiler@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.2"
+  }
+}

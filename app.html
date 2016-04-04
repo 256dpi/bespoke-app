@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bespoke</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="status">
+      <span id="file"></span>
+      <span id="position">0</span>
+      <button class="button" id="present">Present</button>
+    </div>
+    <div class="slides">
+      <iframe class="slide" id='current'></iframe>
+      <iframe class="slide" id='next'></iframe>
+    </div>
+
+    <script type="text/javascript">
+      const $ = require('./bower_components/jquery/dist/jquery.js');
+      const ipcRenderer = require('electron').ipcRenderer;
+
+      ipcRenderer.on('file', function(_, file) {
+        $('#file').html(file);
+        $('#current').attr('src', file);
+        $('#next').attr('src', file);
+        $('#present').click(function(){
+          ipcRenderer.send('present', file);
+        });
+      });
+
+      ipcRenderer.on('slide', function(_, id) {
+        $('#position').html(id);
+        $("#current")[0].contentWindow.deck.slide(id);
+        $("#next")[0].contentWindow.deck.slide(id + 1);
+      });
+
+      // function relay(id) {
+      //   const ipcRenderer = require('electron').ipcRenderer;
+      //   ipcRenderer.send('slide', id);
+      // }
+      //
+      // window.deck.on('next', function(event){
+      //   relay(event.index);
+      // });
+      //
+      // window.deck.on('prev', function(event){
+      //   relay(event.index);
+      // });
+    </script>
+  </body>
+</html>

@@ -5,29 +5,6 @@ const BrowserWindow = electron.BrowserWindow;
 var appWindow = null;
 var presentationWindow = null;
 
-var installScript = `
-  function relay(id) {
-    const ipcRenderer = require('electron').ipcRenderer;
-    ipcRenderer.send('slide', id);
-  }
-
-  window.deck.on('next', function(event){
-    relay(event.index);
-  });
-
-  window.deck.on('prev', function(event){
-    relay(event.index);
-  });
-`;
-
-var controlScript = `
-  const ipcRenderer = require('electron').ipcRenderer;
-
-  ipcRenderer.on('slide', function(_, id) {
-    window.deck.slide(id);
-  });
-`;
-
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin') {
     app.quit();
@@ -36,31 +13,34 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   appWindow = new BrowserWindow({
-    title: 'Bespoke Presenter',
-    width: 600,
-    height: 400,
+    title: 'Bespoke',
+    width: 800,
+    height: 600,
+    fullscreenable: false,
     webPreferences: {
       webSecurity: false
     }
   });
 
-  appWindow.loadURL('file://' + __dirname + '/index.html');
+  appWindow.loadURL('file://' + __dirname + '/start.html');
 
-  appWindow.webContents.on('will-navigate', function(_, file){
+  appWindow.webContents.on('will-navigate', function(event, file){
+    event.preventDefault();
+
+    appWindow.loadURL('file://' + __dirname + '/app.html');
+
     appWindow.webContents.once('dom-ready', function(){
-      appWindow.webContents.executeJavaScript(installScript);
-
-      startPresentation(file);
+      appWindow.webContents.send('file', file);
     });
   });
 });
 
-electron.ipcMain.on('slide', function(_, id){
-  if(id != 0) {
-    id = id;
-  }
+electron.ipcMain.on('present', function(_, file){
+  startPresentation(file);
+});
 
-  presentationWindow.webContents.send('slide', id);
+electron.ipcMain.on('slide', function(_, id){
+  appWindow.webContents.send('slide', id);
 });
 
 function startPresentation(file) {
@@ -87,7 +67,12 @@ function startPresentation(file) {
     presentationWindow.loadURL(file);
 
     presentationWindow.webContents.once('dom-ready', function(){
-      presentationWindow.webContents.executeJavaScript(controlScript);
+      presentationWindow.webContents.executeJavaScript(`
+        window.deck.on('activate', function(event){
+          const ipcRenderer = require('electron').ipcRenderer;
+          ipcRenderer.send('slide', event.index);
+        });
+      `);
     });
   }
 }

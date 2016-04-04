@@ -22,3 +22,24 @@ body {
   color: #666;
   text-align: center;
 }
+
+.status {
+  height: 10vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.slides {
+  height: 90vh;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.slide {
+  height: 100%;
+  flex-grow: 1;
+  margin: 0 5px;
+  border: 1px solid black;
+  pointer-events: none;
+}
