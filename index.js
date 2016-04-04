@@ -7,12 +7,18 @@ var appWindow = null;
 var presentationWindow = null;
 
 app.on('window-all-closed', function() {
-  if (process.platform != 'darwin') {
+  if(process.platform != 'darwin') {
     app.quit();
+  } else {
+    showStart();
   }
 });
 
 app.on('ready', function() {
+  showStart();
+});
+
+function showStart() {
   appWindow = new BrowserWindow({
     title: 'Bespoke',
     width: 800,
@@ -29,7 +35,11 @@ app.on('ready', function() {
     event.preventDefault();
     appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
   });
-});
+
+  appWindow.on('closed', function() {
+    appWindow = null;
+  });
+}
 
 electron.ipcMain.on('present', function(_, file){
   if(!presentationWindow) {
