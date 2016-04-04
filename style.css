@@ -53,13 +53,13 @@ body {
 }
 
 .app .status {
-  margin: 5% 0;
+  margin: 3% 0;
   text-align: center;
 }
 
 .app .slides {
-  height: 60%;
-  padding: 0 5%;
+  height: 50%;
+  margin: 0 5%;
   display: flex;
   align-content: center;
 }
@@ -68,7 +68,7 @@ body {
   display: block;
   height: 100%;
   flex-grow: 1;
-  margin: 0 10px;
+  margin: 0 20px;
   border: 0;
   pointer-events: none;
 }
@@ -87,6 +87,15 @@ body {
 .app .button:hover {
   background-color: #04B9A2;
   outline: 0;
+}
+
+.app .notes {
+  height: 20%;
+  margin: 5%;
+  background-color: #ddd;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 24px;
 }
 
 .present, .slide {
