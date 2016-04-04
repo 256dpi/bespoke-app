@@ -16,7 +16,7 @@ body {
   flex-flow: column;
 }
 
-.title {
+.centered .title {
   display: flex;
   font-size: 24px;
   color: #666;
@@ -30,19 +30,20 @@ body {
   height: 100%;
 }
 
-.status {
+.app .status {
   margin: 5% 0;
   text-align: center;
 }
 
-.slides {
+.app .slides {
   height: 60%;
   padding: 0 5%;
   display: flex;
   align-content: center;
 }
 
-.slide {
+.app .slides .slide {
+  display: block;
   height: 100%;
   flex-grow: 1;
   margin: 0 10px;
@@ -50,7 +51,7 @@ body {
   pointer-events: none;
 }
 
-.button, .button:focus {
+.app .button, .app .button:focus {
   border: 0;
   padding: 10px 20px;
   border-radius: 5px;
@@ -61,7 +62,14 @@ body {
   outline: 0;
 }
 
-.button:hover {
+.app .button:hover {
   background-color: #04B9A2;
   outline: 0;
+}
+
+.present, .slide {
+  display: block;
+  border: 0;
+  width: 100%;
+  height: 100%;
 }

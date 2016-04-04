@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bespoke</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="present">
+      <iframe class="slide" id="presentation"></iframe>
+    </div>
+
+    <script type="text/javascript">
+      const $ = require('./bower_components/jquery/dist/jquery.js');
+      const ipcRenderer = require('electron').ipcRenderer;
+
+      function qs(key) {
+        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+      }
+
+      const file = atob(qs('file'));
+      const slide = $('#presentation');
+
+      slide.attr('src', file);
+      slide[0].onload = function() {
+        slide[0].contentWindow.deck.on('activate', function(event){
+          ipcRenderer.send('slide', event.index);
+        });
+
+        slide[0].contentWindow.focus();
+      };
+    </script>
+  </body>
+</html>

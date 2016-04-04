@@ -67,16 +67,15 @@ function startPresentation(file) {
         webSecurity: false
       }
     });
-
-    presentationWindow.loadURL(file);
-
-    presentationWindow.webContents.once('dom-ready', function(){
-      presentationWindow.webContents.executeJavaScript(`
-        window.deck.on('activate', function(event){
-          const ipcRenderer = require('electron').ipcRenderer;
-          ipcRenderer.send('slide', event.index);
-        });
-      `);
+  } else {
+    presentationWindow = new BrowserWindow({
+      width: 400,
+      height: 300,
+      webPreferences: {
+        webSecurity: false
+      }
     });
   }
+
+  presentationWindow.loadURL('file://' + __dirname + '/present.html?file=' + btoa(file));
 }
