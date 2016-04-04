@@ -25,9 +25,7 @@ body
 
 Rebuild the presentation and drag the generated `dist/index.html` on the applications start screen.
 
-If you have only one screen connected, "Toggle Presentation" will just create a second window that allows you to test your presentation.
-
-If you have two screens connected, "Toggle Presentation" will show the presentation in fullscreen on the second monitor.
+If you have only one screen connected, "Toggle Presentation" will just create a second window that allows you to test your presentation. With two screens connected, "Toggle Presentation" will show the presentation in fullscreen on the second monitor.
 
 ## Presenter Notes
 
