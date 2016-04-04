@@ -49,3 +49,17 @@ body {
   border: 0;
   pointer-events: none;
 }
+
+.button {
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.button:hover, .button:focus {
+  background-color: #ccc;
+  outline: 0;
+}

@@ -8,7 +8,6 @@
   <body>
     <div class="app">
       <div class="status">
-        <span id="position">0</span>
         <button class="button" id="present">Toggle Presentation</button>
       </div>
       <div class="slides">
@@ -36,7 +35,6 @@
       });
 
       ipcRenderer.on('slide', function(_, id) {
-        $('#position').html(id);
         $("#current")[0].contentWindow.deck.slide(id);
         $("#next")[0].contentWindow.deck.slide(id + 1);
       });
