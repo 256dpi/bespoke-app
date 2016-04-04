@@ -23,6 +23,28 @@ body {
   text-align: center;
 }
 
+.centered .recent {
+  margin-top: 50px;
+  font-size: 24px;
+  color: #666;
+  text-align: center;
+}
+
+.centered .recent .title {
+  margin-bottom: 10px;
+}
+
+.centered .recent a {
+  margin: 5px 0;
+  display: block;
+  color: black;
+  text-decoration: none;
+}
+
+.centered .recent a:hover {
+  text-decoration: underline;
+}
+
 .app {
   display: flex;
   background-color: #eee;

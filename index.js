@@ -2,6 +2,11 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const btoa = require('btoa');
+const low = require('lowdb');
+const storage = require('lowdb/file-sync');
+const fs = require('fs');
+
+const db = low(app.getPath('userData') + '/db.json', { storage });
 
 var appWindow = null;
 var presentationWindow = null;
@@ -18,6 +23,16 @@ app.on('ready', function() {
   showStart();
 });
 
+function getTitle(file) {
+  const re = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/gi;
+  const data = fs.readFileSync(file);
+
+  const match = re.exec(data);
+  if(match && match[2]) {
+    return match[2];
+  }
+}
+
 function showStart() {
   appWindow = new BrowserWindow({
     title: 'Bespoke',
@@ -29,12 +44,23 @@ function showStart() {
     }
   });
 
-  appWindow.loadURL('file://' + __dirname + '/start.html');
+  const files = db('files').chain().sortBy('date').reverse().uniqBy('url').take(5);
+  const recent = btoa(JSON.stringify(files.toJSON()));
+  appWindow.loadURL('file://' + __dirname + '/start.html?recent=' + recent);
 
   appWindow.webContents.on('will-navigate', function(event, file){
     event.preventDefault();
-    appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
 
+    const title = getTitle(file.replace('file://', ''));
+    if(title) {
+      db('files').push({
+        title: title,
+        url: file,
+        date: Date.now()
+      });
+    }
+
+    appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
   });
 }
 

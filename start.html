@@ -3,11 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Bespoke</title>
+    <script src="./shared.js" type="text/javascript"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div class="centered">
       <div class="title">Drop the 'index.html' of your presentation here!</div>
+
+      <div class="recent">
+        <div class="title">Recently opened presentations:</div>
+      </div>
     </div>
+
+    <script type="text/javascript">
+      const $ = require('./bower_components/jquery/dist/jquery.js');
+      const recent = JSON.parse(atob(getQueryParam('recent')));
+
+      recent.forEach(function(file){
+        $('.recent').append($('<a>').attr('href', file.url).html(file.title));
+      });
+    </script>
   </body>
 </html>
