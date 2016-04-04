@@ -2,6 +2,7 @@
   "name": "bespoke-app",
   "version": "0.1.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "package": "electron-packager ./ Bespoke --icon logo.icns --platform darwin --arch all --out ~/Desktop/Bespoke --version 0.37.3 --overwrite",
