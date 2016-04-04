@@ -7,7 +7,6 @@
   </head>
   <body>
     <div class="status">
-      <span id="file"></span>
       <span id="position">0</span>
       <button class="button" id="present">Toggle Presentation</button>
     </div>
@@ -28,7 +27,6 @@
 
       const file = atob(qs('file'));
 
-      $('#file').html(file);
       $('#current').attr('src', file);
       $('#next').attr('src', file);
       $('#present').click(function(){
