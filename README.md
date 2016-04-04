@@ -1,4 +1,4 @@
-# bespoke-presenter
+# Bespoke.app
 
 ## Caveats
 
