@@ -1,12 +1,12 @@
 {
-  "name": "bespoke-presenter",
+  "name": "bespoke-app",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "rebuild": "./node_modules/.bin/electron-rebuild",
-    "package": "electron-packager ./ BespokePresenter --platform=all --arch=all --out ~/Desktop/BespokePresenter --version 0.37.3 --overwrite",
-    "package-darwin": "electron-packager ./ BespokePresenter --platform=darwin --arch=all --out ~/Desktop/BespokePresenter --version 0.37.3 --overwrite",
+    "package": "electron-packager ./ BespokeP --platform=all --arch=all --out ~/Desktop/Bespoke --version 0.37.3 --overwrite",
+    "package-darwin": "electron-packager ./ Bespoke --platform=darwin --arch=all --out ~/Desktop/Bespoke --version 0.37.3 --overwrite",
     "run": "./node_modules/.bin/electron ."
   },
   "author": "Joël Gähwiler <joel.gaehwiler@gmail.com>",
