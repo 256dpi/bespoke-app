@@ -2,8 +2,8 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-var mainWindow = null;
-var helpWindow = null;
+var appWindow = null;
+var presentationWindow = null;
 
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin') {
@@ -12,19 +12,43 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-  console.log(electron.screen.getAllDisplays());
-
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
-
-  helpWindow = new BrowserWindow({width: 800, height: 600});
-  helpWindow.loadURL('file://' + __dirname + '/index.html');
-
-  mainWindow.on('closed', function() {
-    mainWindow = null;
+  appWindow = new BrowserWindow({
+    title: 'Bespoke Presenter',
+    width: 600,
+    height: 400,
+    webPreferences: {
+      nodeIntegration: false
+    }
   });
 
-  helpWindow.on('closed', function() {
-    helpWindow = null;
+  appWindow.loadURL('file://' + __dirname + '/index.html');
+
+  appWindow.webContents.on('will-navigate', function(_, file){
+    startPresentation(file);
   });
 });
+
+function startPresentation(file) {
+  var display = electron.screen.getAllDisplays();
+  var second = display[1];
+
+  if(second) {
+    presentationWindow = new BrowserWindow({
+      width: second.bounds.width,
+      height: second.bounds.height,
+      x: second.bounds.x,
+      y: second.bounds.y,
+      frame: false,
+      movable: false,
+      resizable: false,
+      minimizable: false,
+      maximizable: false,
+      alwaysOnTop: true,
+      webPreferences: {
+        nodeIntegration: false
+      }
+    });
+
+    presentationWindow.loadURL(file);
+  }
+}
