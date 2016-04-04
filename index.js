@@ -36,7 +36,10 @@ electron.ipcMain.on('present', function(_, file){
     startPresentation(file);
   } else {
     presentationWindow.close();
-    presentationWindow = null;
+
+    presentationWindow.on('closed', function() {
+      presentationWindow = null;
+    });
   }
 });
 
