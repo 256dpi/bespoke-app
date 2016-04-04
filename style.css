@@ -3,9 +3,9 @@ html {
 }
 
 body {
-  margin: 0;
   font-family: sans-serif;
   height: 100%;
+  margin: 0;
 }
 
 .centered {
@@ -23,23 +23,29 @@ body {
   text-align: center;
 }
 
+.app {
+  display: flex;
+  background-color: #eee;
+  flex-direction: column;
+  height: 100%;
+}
+
 .status {
-  height: 10vh;
-  padding: 20px;
-  box-sizing: border-box;
+  margin: 5% 0;
+  text-align: center;
 }
 
 .slides {
-  height: 90vh;
-  padding: 20px;
-  box-sizing: border-box;
+  height: 60%;
+  padding: 0 5%;
   display: flex;
+  align-content: center;
 }
 
 .slide {
   height: 100%;
   flex-grow: 1;
-  margin: 0 5px;
-  border: 1px solid black;
+  margin: 0 10px;
+  border: 0;
   pointer-events: none;
 }
