@@ -34,10 +34,7 @@ function showStart() {
   appWindow.webContents.on('will-navigate', function(event, file){
     event.preventDefault();
     appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
-  });
 
-  appWindow.on('closed', function() {
-    appWindow = null;
   });
 }
 
