@@ -1,6 +1,6 @@
 # Bespoke.app
 
-The Bespoke.app allows you to present [bespoke.js](https://github.com/bespokejs/bespoke) based presentations on a second screen while having a Keynote-like presenter screen on your main screen. The presenter screens shows the next slide next to the current slide and displays some presenter notes below them.
+The Bespoke.app allows you to present [bespoke.js](https://github.com/bespokejs/bespoke) based presentations on a second screen while having a Keynote-like presenter screen on your main screen. The presenter screens shows the next slide next to the current slide and displays some presenter notes below them. Additionally, the app will keep a list of recently opened presentations to make presenting as comfortable as possible.
 
 **Nothing will ever force you again to use Keynote.**
 
