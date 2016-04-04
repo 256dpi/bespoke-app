@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Bespoke</title>
+    <script src="./shared.js" type="text/javascript"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -19,17 +20,9 @@
     <script type="text/javascript">
       const $ = require('./bower_components/jquery/dist/jquery.js');
       const ipcRenderer = require('electron').ipcRenderer;
+      const file = atob(getQueryParam('file'));
 
-      function qs(key) {
-        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
-        var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
-        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-      }
-
-      const file = atob(qs('file'));
-
-      $('#current').attr('src', file);
-      $('#next').attr('src', file);
+      $('#current, #next').attr('src', file);
       $('#present').click(function(){
         ipcRenderer.send('present', file);
       });
