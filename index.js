@@ -36,7 +36,12 @@ app.on('ready', function() {
 });
 
 electron.ipcMain.on('present', function(_, file){
-  startPresentation(file);
+  if(!presentationWindow) {
+    startPresentation(file);
+  } else {
+    presentationWindow.close();
+    presentationWindow = null;
+  }
 });
 
 electron.ipcMain.on('slide', function(_, id){
