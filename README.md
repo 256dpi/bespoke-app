@@ -6,24 +6,22 @@
 
 ## Get Started
 
-1. Download the latest version from [releases](https://github.com/256dpi/bespoke-app/releases) and install it to your Applications folder.
+Download the latest version from [releases](https://github.com/256dpi/bespoke-app/releases) and install it to your Applications folder.
 
-2. Update your presentation to export the deck:
+Update your presentation to export the deck:
 
 ```js
 window.deck = bespoke.from(...);
 ```
 
-3. Define a default background color:
+Define a default background color:
 
 ```stylus
 body
   background-color: white
 ```
 
-4. Rebuild the presentation.
-
-5. Drag the `dist/index.html` on the applications start screen.
+Rebuild the presentation and drag the generated `dist/index.html` on the applications start screen.
 
 If you have only one screen connected, "Toggle Presentation" will just create a second window that allows you to test your presentation.
 
