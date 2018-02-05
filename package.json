@@ -5,17 +5,17 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "package": "electron-packager ./ Bespoke --icon logo.icns --platform darwin --arch all --out ./dist --version 0.37.3 --overwrite",
+    "package": "electron-packager ./ Bespoke --icon logo.icns --platform darwin --arch all --out ./dist --overwrite",
     "run": "./node_modules/.bin/electron ."
   },
   "author": "Joël Gähwiler <joel.gaehwiler@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "btoa": "^1.1.2",
     "electron": "^1.4.13",
     "electron-packager": "^10.1.2"
   },
   "dependencies": {
+    "btoa": "^1.1.2",
     "lowdb": "^1.0.0"
   }
 }
