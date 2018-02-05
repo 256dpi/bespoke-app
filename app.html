@@ -32,8 +32,8 @@
         $('#current')[0].contentWindow.deck.slide(id);
         $('#next')[0].contentWindow.deck.slide(id + 1);
 
-        var slide = $('#current')[0].contentWindow.deck.slides[id];
-        var notes = $(slide).find('.notes').first();
+        let slide = $('#current')[0].contentWindow.deck.slides[id];
+        let notes = $(slide).find('.notes').first();
         $('.notes').html(notes.html() || '');
       });
     </script>

@@ -12,8 +12,10 @@
   "license": "ISC",
   "devDependencies": {
     "btoa": "^1.1.2",
-    "electron-packager": "^6.0.0",
-    "electron-prebuilt": "^0.37.3"
+    "electron": "^1.4.13",
+    "electron-packager": "^10.1.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lowdb": "^1.0.0"
+  }
 }

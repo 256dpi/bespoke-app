@@ -3,16 +3,17 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const btoa = require('btoa');
 const low = require('lowdb');
-const storage = require('lowdb/file-sync');
+const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
 
-const db = low(app.getPath('userData') + '/db.json', { storage });
+const storage = new FileSync(app.getPath('userData') + '/db.json');
+const db = low(storage);
 
-var appWindow = null;
-var presentationWindow = null;
+let appWindow = null;
+let presentationWindow = null;
 
 app.on('window-all-closed', function() {
-  if(process.platform != 'darwin') {
+  if(process.platform !== 'darwin') {
     app.quit();
   } else {
     showStart();
@@ -44,7 +45,7 @@ function showStart() {
     }
   });
 
-  const files = db('files').chain().sortBy('date').reverse().uniqBy('url').take(5);
+  const files = db.get('files').chain().sortBy('date').reverse().uniqBy('url').take(5);
   const recent = btoa(JSON.stringify(files.toJSON()));
   appWindow.loadURL('file://' + __dirname + '/start.html?recent=' + recent);
 
@@ -53,7 +54,7 @@ function showStart() {
 
     const title = getTitle(file.replace('file://', ''));
     if(title) {
-      db('files').push({
+      db.get('files').push({
         title: title,
         url: file,
         date: Date.now()
@@ -77,8 +78,8 @@ electron.ipcMain.on('slide', function(_, id){
 });
 
 function startPresentation(file) {
-  var display = electron.screen.getAllDisplays();
-  var second = display[1];
+  let display = electron.screen.getAllDisplays();
+  let second = display[1];
 
   if(second) {
     presentationWindow = new BrowserWindow({
