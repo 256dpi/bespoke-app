@@ -23,7 +23,7 @@
       const ipcRenderer = require('electron').ipcRenderer;
       const file = atob(getQueryParam('file'));
 
-      $('#current, #next').attr('src', file);
+      $('#current, #next').attr('src', file + '?preview=true');
       $('#present').click(function(){
         ipcRenderer.send('present', file);
       });

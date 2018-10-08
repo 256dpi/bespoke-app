@@ -17,7 +17,7 @@
       const file = atob(getQueryParam('file'));
       const slide = $('#presentation');
 
-      slide.attr('src', file);
+      slide.attr('src', file + '?preview=false');
       slide[0].onload = function() {
         slide[0].contentWindow.deck.on('activate', function(event){
           ipcRenderer.send('slide', event.index);
