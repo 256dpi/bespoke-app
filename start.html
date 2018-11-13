@@ -8,7 +8,8 @@
   </head>
   <body>
     <div class="centered">
-      <div class="title">Drop the 'index.html' of your presentation here!</div>
+      <div class="title">Drop the 'index.html' of your presentation here,<br> or paste a URL below!</div>
+      <input class="add" name="add" type="text">
 
       <div class="recent">
         <div class="title">Recently opened presentations:</div>
@@ -21,6 +22,10 @@
 
       recent.forEach(function(file){
         $('.recent').append($('<a>').attr('href', file.url).html(file.title));
+      });
+
+      $('.add').change(function(){
+        window.location = $('.add').val();
       });
     </script>
   </body>

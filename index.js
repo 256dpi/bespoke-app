@@ -5,6 +5,7 @@ const btoa = require('btoa');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
+const request = require('request');
 
 const storage = new FileSync(app.getPath('userData') + '/db.json');
 const db = low(storage);
@@ -24,14 +25,31 @@ app.on('ready', function() {
   showStart();
 });
 
-function getTitle(file) {
-  const re = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/gi;
-  const data = fs.readFileSync(file);
+const titleRegex = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/gi;
 
-  const match = re.exec(data);
+function getFileTitle(file, cb) {
+  const match = titleRegex.exec(fs.readFileSync(file).toString());
   if(match && match[2]) {
-    return match[2];
+    cb(match[2]);
+  } else {
+    cb();
   }
+}
+
+function getWebTitle(url, cb) {
+  request(url, (err, res, body) => {
+    if (err) {
+      console.log(err);
+      cb()
+    } else {
+      const match = titleRegex.exec(body);
+      if(match && match[2]) {
+        cb(match[2]);
+      } else {
+        cb();
+      }
+    }
+  });
 }
 
 function showStart() {
@@ -52,16 +70,33 @@ function showStart() {
   appWindow.webContents.on('will-navigate', function(event, file){
     event.preventDefault();
 
-    const title = getTitle(file.replace('file://', ''));
-    if(title) {
-      db.get('files').push({
-        title: title,
-        url: file,
-        date: Date.now()
+    if(file.startsWith('http://') || file.startsWith('https://')) {
+      getWebTitle(file.replace('file://', ''), function(title){
+        if(title) {
+          db.get('files').push({
+            title: title,
+            url: file,
+            date: Date.now(),
+            type: 'web'
+          }).write();
+
+          appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
+        }
+      });
+    } else if(file.startsWith('file://')) {
+      getFileTitle(file, function(title){
+        if(title) {
+          db.get('files').push({
+            title: title,
+            url: file,
+            date: Date.now(),
+            type: 'file'
+          }).write();
+
+          appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
+        }
       });
     }
-
-    appWindow.loadURL('file://' + __dirname + '/app.html?file=' + btoa(file));
   });
 }
 
